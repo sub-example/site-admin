@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crudapp.apps.CrudappConfig',
+    'useradmin.apps.UseradminConfig',
     'bootstrap4',
 ]
 

@@ -12,7 +12,9 @@
     <img src="{% static "images/dog.jpg" %}" alt="表示されません">
     <p class="detail">{{ goal }}</p>
     <p class="detail">「期限：{{ limit_term }}」</p>
-    <p class="detail">作成者は<b id='test'>{{ name }}</b></p>
+    <p class="detail">作成者は<b id='test'>{{ user|title }}</b></p>
+
+    <p><a href= "{% url 'crudapp:logout' %}">Log out</a></p>
       <h3>フォームの実装例</h3>
       <p>文字列と数字を入力し、送信を押すと↓に結果が表示される。TestForm使用</p>
     <hr>

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-from .forms import TestForm, InfoModelFormAdd
+from .forms import TestForm, InfoModelFormAdd, SignUpForm
 from .models import InfoModelForm
-
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -71,3 +71,30 @@ def delete(request,num):
         'obj':obj,
     }
     return render(request,'crudapp/delete.html',delete_dict)
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crudapp:index')
+    else:
+        form = SignUpForm()
+
+    context = {'form':form}
+    return render(request, 'crudapp/signup.html',context)
+
+@login_required
+def detail(request,question_id):
+    user = request.user
+    question = get_object_or_404(Question,pk=question_id)
+    
+    if request.method == 'POST':
+        form = VoteForm(request.POST,question=question)
+        if form.is_valid():
+            form.save()
+            return redirect('crudapp:results', question_id=question.id)
+    else:
+        form = VoteForm(question=question)
+    context={'user':user, 'question':question,'form':form}
+    return render(request,"crudapp/detail.html",context)
