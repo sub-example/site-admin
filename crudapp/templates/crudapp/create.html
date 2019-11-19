@@ -1,0 +1,19 @@
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<html lang="ja">
+<head>
+    <meta charaset="utf-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <table>
+        <form action="{% url 'crudapp:create' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <input type="submit" value="送信">
+        </form> 
+    </table>
+</body>
+</html>

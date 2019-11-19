@@ -1,0 +1,25 @@
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<body>
+    <h1>{{ title }}</h1>
+    <table class="table">
+        <tr><th>ID</th><td>{{ obj.id }}</td></tr>
+        <tr><th>名前</th><td>{{ obj.name }}</td></tr>
+        <tr><th>ID</th><td>{{ obj.mail }}</td></tr>
+        <tr><th>性別</th>
+        {% if i.gender %}
+                <td>男性</td>
+            {% else %}
+                <td>女性</td>
+            {% endif %}
+        </tr>
+        <tr><th>部署</th><td>{{ obj.department }}</td></tr>
+        <tr><th>社歴</th><td>{{ obj.year }}</td></tr>
+        <tr><th>作成日</th><td>{{ obj.created_at }}</td></tr>
+        <form action="{% url "crudapp:delete" id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="削除">
+        </form>
+    </table>
+</body>

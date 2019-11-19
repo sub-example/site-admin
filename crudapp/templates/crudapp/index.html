@@ -1,0 +1,31 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>テストWebアプリ</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+    <script src="{% static 'javascript/sample.js' %}"></script>
+  </head>
+  <body>
+    <h1>社員登録簿アプリケーション</h1>
+    <img src="{% static "images/dog.jpg" %}" alt="表示されません">
+    <p class="detail">{{ goal }}</p>
+    <p class="detail">「期限：{{ limit_term }}」</p>
+    <p class="detail">作成者は<b id='test'>{{ name }}</b></p>
+      <h3>フォームの実装例</h3>
+      <p>文字列と数字を入力し、送信を押すと↓に結果が表示される。TestForm使用</p>
+    <hr>
+    <p>{{ insert_forms|safe }}</p>
+    <table>
+        <form action="{% url 'crudapp:index' %}" method="post">
+            {% csrf_token %}
+            <tr><td></td><td>入力フォーム</td></tr>
+            {{ form.as_table }}
+            <tr><td></td><td><input type="submit" value="送信"></td></tr>
+        </form>
+    </table>
+    <hr>
+    <a href="{% url "crudapp:info" %}">データ一覧へ</a>
+  </body>
+</html>

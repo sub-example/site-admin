@@ -1,0 +1,35 @@
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<body>
+    <h1>{{title}}</h1>
+    <a href="{% url "crudapp:create" %}">データを入力</a>
+    <table class="table">
+        <tr>
+            {% for h in header %}    
+            <th>{{ h }}</th>
+            {% endfor %}
+            <th>更新</th>
+            <th>削除</th>
+        </tr>
+        
+        {% for i in val %}
+        <tr>
+            <th>{{ i.id }}</th>
+            <th>{{ i.name }}</th>
+            <th>{{ i.mail }}</th>
+            {% if i.gender %}
+                <th>男性</th>
+            {% else %}
+                <th>女性</th>
+            {% endif %}
+            <th>{{ i.department }}</th>
+            <th>{{ i.year }}</th>
+            <th>{{ i.created_at }}</th>
+            <th><a href="{% url 'crudapp:update' i.id %}">更新</a></th>
+            <th><a href="{% url 'crudapp:delete' i.id %}">削除</a></th>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
