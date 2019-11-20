@@ -1,6 +1,7 @@
 from django import forms
 from .models import InfoModelForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 class TestForm(forms.Form):
     text = forms.CharField(label='文字列')
@@ -49,3 +50,10 @@ class SignUpForm(forms.Form):
         new_user = User.objects.create_user(username = username)
         new_user.set_password(password)
         new_user.save()
+        
+class LoginForm(AuthenticationForm):
+    def __init__(self,*args,**kwards):
+        super().__init__(*args,**kwards)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = field.label
